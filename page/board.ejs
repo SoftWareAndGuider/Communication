@@ -60,37 +60,25 @@
     </header>
     
     <main class="mdb-docs-layout">
-      <div class="container pt-3">
-        <div class="text-center">
-          <img class="w-50" src="/src/img/logo.png" alt="장곡중학교" draggable="false">
-        </div>
+      <div class="container p-3">
+        <div class="h-100 w-100 shadow rounded p-4">
+          <% if (!content) { %>
+            <h2>요청하신 글을 찾을 수 없어요</h2>
+            <hr />
+            <button class="btn btn-primary" onclick="window.history.back()"><i class="fas fa-arrow-left"></i> 돌아가기</button>
+          <% } else { %>
+            <% content.createdAt = new Date(content.createdAt) %>
+            
+            <h2><%= content.title %></h2>
+            <p><small><%= content.username %> | <i class="fas fa-thumbs-up"></i> <%= content.likes %> | <%= content.createdAt.getFullYear() %>년 <%= content.createdAt.getMonth() + 1 %>월 <%= content.createdAt.getDate() %>일 <%= content.createdAt.getHours() %>:<%= content.createdAt.getMinutes() %></small></p>
+            <hr />
 
-        <div class="row p-2">
-          <div class="card col-sm-4">
-            <div class="card-body">
-              <h5 class="card-title">오늘의 급식</h5>
-              <p class="card-text">
-                <ul>
-                  <% foodData.menu.forEach((menu) => { %>
-                    <li><%= menu || '급식이 등록되지 않았습니다' %></li>
-                  <% }) %>
-                </ul>
-              </p>
-            </div>
-          </div>
-          <div class="col-sm-1"></div>
-          <div class="card col-sm-7">
-            <div class="card-body">
-              <h5 class="card-title">공지</h5>
-              <p class="card-text">
-                <% bd_noti.forEach((noti) => { %>
-                  <a class="btn alert-warning w-100 text-left mt-1 shadow-0" href="/board/noti/<%= noti.id %>">
-                    <%= noti.title %> <i class="fas fa-link"></i>
-                  </a>
-                <% }) %>
-              </p>
-            </div>
-          </div>
+            <% if (xss) { %>
+              <%- content.content %>
+            <% } else { %>
+              <p><%= content.content %></p>
+            <% } %>
+          <% } %>
         </div>
       </div>
     </main>

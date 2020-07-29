@@ -60,37 +60,34 @@
     </header>
     
     <main class="mdb-docs-layout">
-      <div class="container pt-3">
-        <div class="text-center">
-          <img class="w-50" src="/src/img/logo.png" alt="장곡중학교" draggable="false">
-        </div>
-
-        <div class="row p-2">
-          <div class="card col-sm-4">
-            <div class="card-body">
-              <h5 class="card-title">오늘의 급식</h5>
-              <p class="card-text">
-                <ul>
-                  <% foodData.menu.forEach((menu) => { %>
-                    <li><%= menu || '급식이 등록되지 않았습니다' %></li>
-                  <% }) %>
-                </ul>
-              </p>
-            </div>
-          </div>
-          <div class="col-sm-1"></div>
-          <div class="card col-sm-7">
-            <div class="card-body">
-              <h5 class="card-title">공지</h5>
-              <p class="card-text">
-                <% bd_noti.forEach((noti) => { %>
-                  <a class="btn alert-warning w-100 text-left mt-1 shadow-0" href="/board/noti/<%= noti.id %>">
-                    <%= noti.title %> <i class="fas fa-link"></i>
-                  </a>
-                <% }) %>
-              </p>
-            </div>
-          </div>
+      <div class="container p-3">
+        <div class="h-100 w-100 shadow rounded p-4">
+          <h2><%= bname %></h2>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">제목</th>
+                <th scope="col">작성자</th>
+                <th scope="col">작성일</th>
+                <th scope="col">추천수</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (bd_noti.length < 1) { %>
+                <tr><td colspan="5" class="text-center">게시글이 없어요...</td></tr>
+              <% } else bd_noti.forEach((noti) => { %>
+                <% noti.createdAt = new Date(noti.createdAt) %>
+                <tr onclick="window.location.replace('/board/noti/<%= noti.id %>')">
+                  <td><%= noti.id %></td>
+                  <td><%= noti.title %></td>
+                  <td><%= noti.username %></td>
+                  <td><%= noti.createdAt.getFullYear() %>년 <%= noti.createdAt.getMonth() + 1 %>월 <%= noti.createdAt.getDate() %>일 <%= noti.createdAt.getHours() %>:<%= noti.createdAt.getMinutes() %></td>
+                  <td><%= noti.likes %></td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
         </div>
       </div>
     </main>

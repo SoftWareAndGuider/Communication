@@ -14285,15 +14285,14 @@ fieldset:disabled .btn-group {
 
 @media (max-width: 1440px) {
   #mdb-sidenav-toggler {
-    display: unset;
+    display: unset !important;
   }
 
   #mdb-sidenav {
-    transform: translate(-100%);
+    transform: translate(-100%) !important;
   }
 
   .mdb-docs-layout {
-    padding-left: 0px; 
+    padding-left: 0px !important;
   }
-
 }
