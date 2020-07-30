@@ -14296,3 +14296,25 @@ fieldset:disabled .btn-group {
     padding-left: 0px !important;
   }
 }
+
+.editormd-menu > li:nth-child(n+11) {
+  display: none;
+}
+
+.editormd-menu > li.divider:nth-child(n+11) {
+  display: none;
+}
+
+
+.editormd-menu > li.divider:nth-child(n+20) {
+  display: inline-block;
+}
+
+.editormd-menu > li:nth-child(n+17) {
+  display: inline-block;
+}
+
+.editormd-menu > li:nth-child(n+23) {
+  display: none;
+}
+

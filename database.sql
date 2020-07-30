@@ -40,3 +40,25 @@ create unique index bd_noti_id_uindex
 alter table bd_noti
 	add constraint bd_noti_pk
 		primary key (id);
+
+create table bd_suggest
+(
+	id bigint not null,
+	title tinytext default '(제목없음)' not null,
+	content longtext null,
+	createdAt timestamp default CURRENT_TIMESTAMP null,
+	likes int default 0 not null,
+	author bigint not null,
+	constraint bd_suggest_users_id_fk
+		foreign key (author) references users (id)
+);
+
+create unique index bd_suggest_id_uindex
+	on bd_suggest (id);
+
+alter table bd_suggest
+	add constraint bd_suggest_pk
+		primary key (id);
+
+INSERT INTO users (id, username, passwd, joinedAt, admin) VALUES (0, '베타테스터', 'passwd', DEFAULT, DEFAULT);
+INSERT INTO users (id, username, passwd, joinedAt, admin) VALUES (1, '박민혁', 'passwd', DEFAULT, 1);

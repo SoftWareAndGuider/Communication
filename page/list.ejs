@@ -1,63 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- Font Awesome -->
-    <link
-      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-      rel="stylesheet"
-    />
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-      rel="stylesheet"
-    />
-    <!-- MDB -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/1.0.0-alpha4/mdb.min.css"
-      rel="stylesheet"
-    />
-
-    
-    <script
-    type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/1.0.0-alpha4/mdb.min.js"
-    ></script>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet"> 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
-    
-    <link rel="stylesheet" href="/src/main.css">
+    <title><%= bname %> - 장곡중 커뮤니티</title>
+    <%- layouts.meta %>
   </head>
   <body>
-    <header>
-      <div class="sidenav sidenav-primary ps" data-mode="side" data-hidden="false" data-accordion="true" id="mdb-sidenav" role="navigation" style="width: 240px; height: 100vh; position: fixed; transition: all 0.3s linear 0s; transform: translateX(0%);">
-        <a class="ripple d-flex justify-content-center py-4" href="/" data-color="primary">
-          <img id="MDB-logo" src="/src/img/logo.png" alt="장곡중학교" draggable="false">
-        </a>
-
-        <ul class="sidenav-menu">
-          <li class="sidenav-item">
-            <a class="sidenav-link ripple-surface ripple-surface-primary" href="#sidenav-collapse-1-0" data-toggle="collapse" role="button" tabindex="1" aria-expanded="true">
-              <i class="fas fa-comment pr-3"></i><span>게시판</span><i class="fas fa-angle-down rotate-icon" style="transition-property: transform; transform: rotate(180deg);"></i></a>
-            <ul id="sidenav-collapse-1-0" class="sidenav-collapse collapse show" style="transition-property: height;">
-              <li class="sidenav-item">
-                <a class="sidenav-link ripple-surface" href="/board/noti" tabindex="1">공지 게시판</a>
-              </li>
-              <li class="sidenav-item">
-                <a class="sidenav-link ripple-surface" href="/board/suggest" tabindex="1">건의 게시판</a>
-              </li>
-            </ul>
-          </li>
-          <li class="sidenav-item">
-            <a class="sidenav-link ripple-surface" href="/board/admin" tabindex="1"><i class="fas fa-cogs pr-3"></i><span>Admin</span></a>
-        </li>
-        </ul>
-      </div>
-      <button id="sidenav-toggler" data-toggle="sidenav" data-target="#mdb-sidenav" type="button" class="btn shadow-0 p-0 mr-3 ripple-surface" aria-expanded="false"><i class="fas fa-bars fa-lg"></i></button>
-    </header>
+    <%- layouts.header %>
     
     <main class="mdb-docs-layout">
       <div class="container p-3">
@@ -74,35 +22,26 @@
               </tr>
             </thead>
             <tbody>
-              <% if (bd_noti.length < 1) { %>
+              <% if (board.length < 1) { %>
                 <tr><td colspan="5" class="text-center">게시글이 없어요...</td></tr>
-              <% } else bd_noti.forEach((noti) => { %>
-                <% noti.createdAt = new Date(noti.createdAt) %>
-                <tr onclick="window.location.replace('/board/noti/<%= noti.id %>')">
-                  <td><%= noti.id %></td>
-                  <td><%= noti.title %></td>
-                  <td><%= noti.username %></td>
-                  <td><%= noti.createdAt.getFullYear() %>년 <%= noti.createdAt.getMonth() + 1 %>월 <%= noti.createdAt.getDate() %>일 <%= noti.createdAt.getHours() %>:<%= noti.createdAt.getMinutes() %></td>
-                  <td><%= noti.likes %></td>
+              <% } else board.forEach((ctx) => { %>
+                <% ctx.createdAt = new Date(ctx.createdAt) %>
+                <tr onclick="window.location.replace('/board/<%= bslot %>/<%= ctx.id %>')">
+                  <td><%= ctx.id %></td>
+                  <td><%= ctx.title %></td>
+                  <td><%= ctx.username %></td>
+                  <td><%= ctx.createdAt.getFullYear() %>년 <%= ctx.createdAt.getMonth() + 1 %>월 <%= ctx.createdAt.getDate() %>일 <%= ctx.createdAt.getHours() %>:<%= ctx.createdAt.getMinutes() %></td>
+                  <td><%= ctx.likes %></td>
                 </tr>
               <% }) %>
             </tbody>
           </table>
+          <a href="/board/<%= bslot %>/write" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> 글쓰기</a>
         </div>
       </div>
     </main>
 
-    <footer class="bg-light text-center text-lg-left mdb-docs-layout">
-      <div class="progress">
-        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;"></div>
-      </div>
-      <!-- Copyright -->
-      <div class="text-center p-3">
-        © 2020 Copyright:
-        <a class="text-dark" href="https://github.com/SoftwareAndGuider/">(칠곡)장곡중학교 Software and Guiders</a>
-      </div>
-      <!-- Copyright -->
-    </footer>
+    <%- layouts.footer %>
     <script src="/src/main.js"></script>
   </body>
 </html>

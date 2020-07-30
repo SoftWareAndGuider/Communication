@@ -1,0 +1,29 @@
+<header>
+  <div class="sidenav sidenav-primary ps" data-mode="side" data-hidden="false" data-accordion="true" id="mdb-sidenav" role="navigation" style="width: 240px; height: 100vh; position: fixed; transition: all 0.3s linear 0s; transform: translateX(0%);">
+    <a class="ripple d-flex justify-content-center py-4" href="/" data-color="primary">
+      <img src="/src/img/logo.png" alt="장곡중학교" draggable="false">
+    </a>
+
+    <ul class="sidenav-menu">
+      <li class="sidenav-item">
+        <a class="sidenav-link ripple-surface" href="/" tabindex="1"><i class="fas fa-home pr-3"></i><span>홈</span></a>
+      </li>
+      <li class="sidenav-item">
+        <a class="sidenav-link ripple-surface ripple-surface-primary" href="#sidenav-collapse-1-0" data-toggle="collapse" role="button" tabindex="1" aria-expanded="true">
+          <i class="fas fa-comment pr-3"></i><span>게시판</span><i class="fas fa-angle-down rotate-icon" style="transition-property: transform; transform: rotate(180deg);"></i></a>
+        <ul id="sidenav-collapse-1-0" class="sidenav-collapse collapse show" style="transition-property: height;">
+          <li class="sidenav-item">
+            <a class="sidenav-link ripple-surface" href="/board/noti" tabindex="1">공지 게시판</a>
+          </li>
+          <li class="sidenav-item">
+            <a class="sidenav-link ripple-surface" href="/board/suggest" tabindex="1">건의 게시판</a>
+          </li>
+        </ul>
+      </li>
+      <li class="sidenav-item">
+        <a class="sidenav-link ripple-surface" href="/board/admin" tabindex="1"><i class="fas fa-cogs pr-3"></i><span>Admin</span></a>
+      </li>
+    </ul>
+  </div>
+  <button id="sidenav-toggler" data-toggle="sidenav" data-target="#mdb-sidenav" type="button" class="btn shadow-0 p-0 mr-3 ripple-surface" aria-expanded="false"><i class="fas fa-bars fa-lg"></i></button>
+</header>

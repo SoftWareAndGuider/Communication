@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>글 작성 - 장곡중 커뮤니티</title>
+    <%- layouts.meta %>
+    <link rel="stylesheet" href="/node_modules/editor.md/css/editormd.min.css">
+  </head>
+  <body>
+    <%- layouts.header %>
+
+    <main class="mdb-docs-layout">
+      <div class="container p-3">
+        <div class="h-100 w-100 shadow rounded p-4">
+          <h2><%= bname %> 작성하기</h2>
+          <hr />
+          <div class="alert alert-warning" role="alert">
+            <ul>
+              <li>베타 기간동안 모든 게시글은 익명으로 등록됩니다</li>
+              <li>베타 기간 이후 모든 게시글은 삭제됩니다</li>
+            </ul>
+          </div>
+          <form method="POST" action="/board/<%= bslot %>/write" class="w-100 h-100">
+            <div class="form-outline mb-4">
+              <input name="title" type="text" id="title" class="form-control" />
+              <label class="form-label" for="title">제목</label>
+            </div>
+            <div id="editor">
+              <textarea name="content"></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">보내기 <i class="far fa-hand-point-right"></i></button>
+          </form>
+        </div>
+      </div>
+    </main>
+    
+    <%- layouts.footer %>
+    <script src="/node_modules/editor.md/editormd.min.js"></script>
+    <script src="/node_modules/editor.md/languages/en.js"></script>
+    <script src="/src/main.js"></script>
+    <script src="/src/editor.js"></script>
+  </body>
+</html>
