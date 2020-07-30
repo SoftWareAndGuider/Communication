@@ -30,15 +30,9 @@ app.use(express.urlencoded({ extended: true }))
 
 app.get('/', (_, res) => {
   const date = new Date()
-
-  // Crawl Part ---
   food(date.getFullYear(), date.getMonth() + 1, date.getDate(), async (err, foodData) => {
     if (err) console.log(err)
-
-    // SQL Part ---
     const bd_noti = await db.select('title', 'id').from('bd_noti').limit(5).orderBy('id', 'desc')
-
-    // Render Part ---
     render(path + '/page/index.ejs', { foodData: foodData.result, bd_noti, layouts }, (err, str) => {
       if (err) console.log(err)
       else res.send(str)
@@ -66,10 +60,8 @@ app.get('/board/noti/:id', async (req, res) => {
   })
 })
 
-
 app.get('/board/suggest', async (req, res) => {
   const bd_suggest = await db.select('*').from('bd_suggest').leftJoin('users', 'bd_suggest.author', 'users.uid').orderBy('bd_suggest.id', 'desc')
-
   render(path + '/page/list.ejs', { bname: '문의 게시판', board: bd_suggest, bslot: 'suggest', offset: req.query.page || 0, layouts }, (err, str) => {
     if (err) console.log(err)
     res.send(str)
@@ -84,18 +76,18 @@ app.get('/board/suggest/write', (_, res) => {
 })
 
 app.post('/board/suggest/write', async (req, res) => {
-  if (cooldown.includes(req.ip)) return res.send('<script>alert(\'베타 기간중에는 30초 글 올리기 제한이 있습니다\');window.location.replace(\'/\')</script>')
+  if (cooldown.includes(req.ip)) return res.send('<script>alert(\'베타 기간중에는 30초 글 올리기 제한이 있습니다\');window.location.assign(\'/\')</script>')
   const coolindex = cooldown.push(req.ip)
   setTimeout(() => {
     cooldown.splice(coolindex - 1)
   }, 30000)
   
-  if (!req.body.title || !req.body.content || !req.body) return res.send('<script>alert(\'잘못된 요청입니다\');window.location.replace(\'/\')</script>')
-  if (req.body.content.length < 10) return res.send('<script>alert(\'글이 너무 짧아 올릴 수 없습니다\');window.location.replace(\'/\')</script>')
+  if (!req.body.title || !req.body.content || !req.body) return res.send('<script>alert(\'잘못된 요청입니다\');window.location.assign(\'/\')</script>')
+  if (req.body.content.length < 10) return res.send('<script>alert(\'글이 너무 짧아 올릴 수 없습니다\');window.location.assign(\'/\')</script>')
 
   const id = Date.now()
   await db.insert({ id, title: req.body.title, content: req.body.content, author: 0 }).from('bd_suggest')
-  res.send('<script>alert(\'게시글이 성공적으로 등록되었습니다\');window.location.replace(\'/board/suggest/' + id + '\')</script>')
+  res.send('<script>alert(\'게시글이 성공적으로 등록되었습니다\');window.location.assign(\'/board/suggest/' + id + '\')</script>')
 })
 
 app.get('/board/suggest/:id', async (req, res) => {

@@ -26,7 +26,7 @@
                 <tr><td colspan="5" class="text-center">게시글이 없어요...</td></tr>
               <% } else board.forEach((ctx) => { %>
                 <% ctx.createdAt = new Date(ctx.createdAt) %>
-                <tr onclick="window.location.replace('/board/<%= bslot %>/<%= ctx.id %>')">
+                <tr onclick="window.location.assign('/board/<%= bslot %>/<%= ctx.id %>')">
                   <td><%= ctx.id %></td>
                   <td><%= ctx.title %></td>
                   <td><%= ctx.username %></td>
