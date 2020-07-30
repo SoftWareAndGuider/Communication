@@ -69,7 +69,7 @@ app.get('/board/noti/:id', async (req, res) => {
 
 app.get('/board/suggest', async (req, res) => {
   const bd_suggest = await db.select('*').from('bd_suggest').leftJoin('users', 'bd_suggest.author', 'users.uid').orderBy('bd_suggest.id', 'desc')
-  console.log(bd_suggest)
+
   render(path + '/page/list.ejs', { bname: '문의 게시판', board: bd_suggest, bslot: 'suggest', offset: req.query.page || 0, layouts }, (err, str) => {
     if (err) console.log(err)
     res.send(str)
