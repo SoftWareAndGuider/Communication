@@ -27,6 +27,13 @@
             <div id="editor">
               <textarea name="content"></textarea>
             </div>
+
+            <% if (admin) { %>
+              <div class="form-outline mb-4">
+                <input name="passwd" type="password" id="passwd" class="form-control" />
+                <label class="form-label" for="passwd">관리자 비밀번호</label>
+              </div>
+            <% } %>
             
             <button type="submit" class="btn btn-primary">보내기 <i class="far fa-hand-point-right"></i></button>
           </form>

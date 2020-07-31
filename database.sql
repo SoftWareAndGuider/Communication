@@ -60,5 +60,5 @@ alter table bd_suggest
 	add constraint bd_suggest_pk
 		primary key (id);
 
-INSERT INTO users (uid, username, passwd, joinedAt, admin) VALUES (0, '베타테스터', 'passwd', DEFAULT, DEFAULT);
-INSERT INTO users (uid, username, passwd, joinedAt, admin) VALUES (1, '박민혁', 'passwd', DEFAULT, 1);
+INSERT INTO users (uid, username, passwd, joinedAt, admin) VALUES (0, '베타테스터', '', DEFAULT, DEFAULT);
+INSERT INTO users (uid, username, passwd, joinedAt, admin) VALUES (1, '관리자', '83ff34c909ab8a86f1b1292e5467f65a96ef9d38fd0d602f2109ee1412fabe57', DEFAULT, 1);
