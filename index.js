@@ -1,5 +1,4 @@
 const PORT = process.env.janggok || 8080
-const PASSWD = process.env.jPasswd || '83ff34c909ab8a86f1b1292e5467f65a96ef9d38fd0d602f2109ee1412fabe57'
 
 const sha256 = require('sha256')
 const express = require('express')
