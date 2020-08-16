@@ -1,5 +1,6 @@
 const PORT = process.env.janggok || 8080
 
+const marked = require('marked')
 const sha256 = require('sha256')
 const express = require('express')
 const path = require('path').resolve()
@@ -70,7 +71,8 @@ app.post('/board/noti/write', async (req, res) => {
 
 app.get('/board/noti/:id', async (req, res) => {
   const [ content ] = await db.select('*').from('bd_noti').where('bd_noti.id', req.params.id).leftJoin('users', 'bd_noti.author', 'users.uid')
-  render(path + '/page/board.ejs', { content, xss: true, layouts }, (err, str) => {
+  if (content) content.content = marked(content.content)
+  render(path + '/page/board.ejs', { content, layouts }, (err, str) => {
     if (err) console.log(err)
     res.send(str)
   })
@@ -109,7 +111,8 @@ app.post('/board/suggest/write', async (req, res) => {
 
 app.get('/board/suggest/:id', async (req, res) => {
   const [ content ] = await db.select('*').from('bd_suggest').where('bd_suggest.id', req.params.id).leftJoin('users', 'bd_suggest.author', 'users.uid')
-  render(path + '/page/board.ejs', { content, xss: false, layouts }, (err, str) => {
+  if (content) content.content = marked(content.content)
+  render(path + '/page/board.ejs', { content, layouts }, (err, str) => {
     if (err) console.log(err)
     res.send(str)
   })

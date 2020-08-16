@@ -21,11 +21,7 @@
             <p><small><%= content.username %> | <i class="fas fa-thumbs-up"></i> <%= content.likes %> | <%= content.createdAt.getFullYear() %>년 <%= content.createdAt.getMonth() + 1 %>월 <%= content.createdAt.getDate() %>일 <%= content.createdAt.getHours() %>:<%= content.createdAt.getMinutes() %></small></p>
             <hr />
 
-            <% if (xss) { %>
-              <%- content.content %>
-            <% } else { %>
-              <p><%= content.content %></p>
-            <% } %>
+            <%- content.content %>
           <% } %>
         </div>
       </div>
