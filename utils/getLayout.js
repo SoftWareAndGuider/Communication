@@ -2,7 +2,12 @@ const { readFileSync: read, readdir } = require('fs')
 const path = require('path').resolve()
 
 module.exports = (cb) => {
-  setInterval(() => {
+  get(cb)()
+  setInterval(get(cb), 1000)
+}
+
+function get (cb) {
+  function fn () {
     readdir(path + '/layout', (err, files) => {
       if (err) console.log(err)
       const layouts = {}
@@ -11,5 +16,6 @@ module.exports = (cb) => {
       })
       cb(layouts)
     })
-  }, 1000)
+  }
+  return fn
 }
